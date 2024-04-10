@@ -1,6 +1,12 @@
 <script lang="ts">
+import { useTaskStore } from "~/src/stores/TaskStore";
+
 export default {
   props: ["task"],
+  setup() {
+    const taskStore = useTaskStore();
+    return { taskStore };
+  },
 };
 </script>
 
@@ -8,20 +14,22 @@ export default {
   <div class="task">
     <h3>{{ task.title }}</h3>
     <div class="icons">
-      <i class="material-icons">delete</i>
-      <i class="material-icons">favorite</i>
+      <i class="material-icons" @click="taskStore.deleteTask(task.id)"
+        >delete</i
+      >
+      <i
+        class="material-icons"
+        :class="{ active: task.isFav }"
+        @click="taskStore.toggleFav(task.id)"
+        >favorite</i
+      >
     </div>
   </div>
 </template>
 
 <style scoped>
-/* task list */
-.task-list {
-  max-width: 640px;
-  margin: 20px auto;
-}
 .task {
-  padding: 6px 20px;
+  padding: 10px 20px;
   background: #fff;
   margin-top: 20px;
   border-radius: 4px;
@@ -45,62 +53,5 @@ export default {
 }
 .task i.active {
   color: #ff005d;
-}
-
-/* filter nav */
-.filter {
-  width: 640px;
-  margin: 10px auto;
-  text-align: right;
-}
-.filter button {
-  display: inline-block;
-  margin-left: 10px;
-  background: #fff;
-  border: 2px solid #555;
-  border-radius: 4px;
-  padding: 4px 8px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-/* new task form */
-.new-task-form {
-  background: #e7e7e7;
-  padding: 20px 0;
-}
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 10px;
-}
-form button {
-  background: #ffd859;
-  border: 0;
-  padding: 10px;
-  font-family: "Poppins", sans-serif;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
-}
-form input {
-  border: 0;
-  padding: 10px;
-  border-radius: 6px;
-  color: #555;
-  font-size: 1em;
-}
-
-/* loading state */
-.loading {
-  max-width: 640px;
-  border: 1px solid #ffd859;
-  background: #ffe9a0;
-  color: #3a3a3a;
-  padding: 5px 0;
-  text-align: center;
-  margin: 30px auto;
 }
 </style>

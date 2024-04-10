@@ -2,8 +2,9 @@
 import { ref } from "vue";
 import { useTaskStore } from "~/src/stores/TaskStore";
 import TaskDetails from "~/src/components/TaskDetails.vue";
+import TaskForm from "../src/components/TaskForm.vue";
 export default {
-  components: { TaskDetails },
+  components: { TaskForm, TaskDetails },
   setup() {
     const taskStore = useTaskStore();
     const filter = ref("all");
@@ -18,6 +19,11 @@ export default {
       <img src="/src/assets/img/pinia-logo.png" alt="logo" />
       <h1>Pinia Tasks</h1>
     </header>
+
+    <!--task form-->
+    <div class="new-task-form">
+      <TaskForm />
+    </div>
 
     <!--filter-->
     <nav class="filter">
@@ -136,22 +142,6 @@ form {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 10px;
-}
-form button {
-  background: #ffd859;
-  border: 0;
-  padding: 10px;
-  font-family: "Poppins", sans-serif;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
-}
-form input {
-  border: 0;
-  padding: 10px;
-  border-radius: 6px;
-  color: #555;
-  font-size: 1em;
 }
 
 /* loading state */
