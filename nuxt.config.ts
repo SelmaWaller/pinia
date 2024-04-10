@@ -1,8 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: [// ...
-  "@pinia/nuxt", "@nuxtjs/tailwindcss"],
+  modules: [
+    // ...
+    "@pinia/nuxt",
+    "@nuxtjs/tailwindcss",
+  ],
   app: {
     head: {
       link: [
@@ -12,5 +15,8 @@ export default defineNuxtConfig({
         },
       ],
     },
+  },
+  devServer: {
+    port: 8080,
   },
 });
