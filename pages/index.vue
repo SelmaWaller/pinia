@@ -7,6 +7,9 @@ export default {
   components: { TaskForm, TaskDetails },
   setup() {
     const taskStore = useTaskStore();
+
+    //fetch tasks
+    taskStore.getTasks();
     const filter = ref("all");
     return { taskStore, filter };
   },
@@ -30,6 +33,8 @@ export default {
       <button @click="filter = 'all'">All tasks</button>
       <button @click="filter = 'favs'">Favs</button>
     </nav>
+
+    <div class="loading" v-if="taskStore.loading">Loading tasks...</div>
 
     <!-- task list-->
     <div class="task-list" v-if="filter === 'all'">
